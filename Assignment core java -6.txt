@@ -1,0 +1,187 @@
+
+Q1]
+import java.util.*;
+import java.lang.Math;
+class Student
+{
+    int rollno;
+    String name;
+
+    void setData(int rollno, String name)
+    {
+        this.rollno=rollno;
+        this.name=name;
+    }
+
+    void showData()
+    {
+        System.out.println("ID: "+rollno);
+        System.out.println("Name: "+name);
+    }
+}
+
+class Test
+{
+    public static void main(String [] args)
+    {
+        Student obj=new Student();
+        obj.setData(12345,"Sumit");
+        obj.showData();
+    }
+}
+
+
+
+
+Q2]class Circle
+{
+    int radius;
+    float area;
+
+    void init()
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Radius: ");
+        radius=sc.nextInt();
+    }
+
+    void calculateArea()
+    {
+        area=(float)(22/7.0f)*(radius*radius);
+    }
+
+    void display()
+    {
+        System.out.println("Area: "+area);
+    }
+}
+
+class Test
+{
+    public static void main(String [] args)
+    {
+        Circle obj=new Circle();
+        obj.init();
+        obj.calculateArea();
+        obj.display();
+    }
+}
+
+
+
+
+Q3]
+class MathOperation
+{
+    static int add(int a, int b)
+    {
+        return a+b;
+    }
+
+    static int subtract(int a, int b)
+    {
+        if(b>a)
+            return b-a;
+        else
+        return a-b;
+    }
+
+    static int multiply(int a, int b)
+    {
+        return a*b;
+    }
+
+    static double power(int a, int b)
+    {
+        return Math.pow(a,b);
+    }
+}
+
+class Test
+{
+    public static void main(String [] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("a: ");
+        int a=sc.nextInt();
+        System.out.println("b: ");
+        int b=sc.nextInt();
+
+        System.out.println(MathOperation.add(a,b));
+        System.out.println(MathOperation.subtract(a,b));
+        System.out.println(MathOperation.multiply(a,b));
+        System.out.println(MathOperation.power(a,b));
+    }
+}
+
+
+
+
+Q3]
+class MathOperation
+{
+    int multiply(int a, int b)
+    {
+        return a*b;
+    }
+
+    double multiply(float a, float b, float c)
+    {
+        return a*b*c;
+    }
+
+    double multiply(int arr[])
+    {
+        double pro=0;
+        for(int i=0;i<arr.length;i++)
+        {
+            pro=pro+arr[i];
+        }
+        return pro;
+    }
+
+    double multiply(double a, int b)
+    {
+        return a*b;
+    }
+}
+
+class Test
+{
+    public static void main(String [] args)
+    {
+        Scanner sc=new Scanner(System.in);
+        System.out.print("Int a: ");
+        int a=sc.nextInt();
+        System.out.print("Int b: ");
+        int b=sc.nextInt();
+
+        System.out.print("Float c: ");
+        float c=sc.nextFloat();
+        System.out.print("Float d: ");
+        float d=sc.nextFloat();
+        System.out.print("Float e: ");
+        float e=sc.nextFloat();
+
+        System.out.print("Enter Array Length: ");
+        int x=sc.nextInt();
+        int arr[]=new int[x];
+        for(int i=0;i<x;i++)
+        {
+            System.out.print("a[i+1]: ");
+            arr[i]=sc.nextInt();
+        }
+
+        System.out.print("Double f: ");
+        double f=sc.nextDouble();
+        System.out.print("Int g: ");
+        int g=sc.nextInt();
+
+        MathOperation obj=new MathOperation();
+
+        System.out.println("\nDouble a*b: "+obj.multiply(a,b));
+        System.out.println("Double c*d: "+obj.multiply(c,d,e));
+        System.out.println("Double e*f: "+obj.multiply(arr));
+        System.out.println("Double g*h: "+obj.multiply(a,b));
+    }
+}
