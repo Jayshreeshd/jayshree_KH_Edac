@@ -22,10 +22,17 @@ insert into  Employee values(6,"king",null,6000,1);
 select  *from Employee;
 
 show tables;
+select *from Employee order by emp_name;
+select *from Employee order by emp_name desc;
 
 select dept_id, sum(salary) 
 from  Employee
 group by dept_id;
+
+select dept_id, sum(salary) 
+from  Employee
+group by dept_id
+ having sum(salary) > 17000;
 
 select * from employee;
 select * from Department;
@@ -38,6 +45,3 @@ having sum(salary) > 18000 ;
 select * from Employee
 group by dept_id
 having sum(salary) < 20000 ;
-
-
-
