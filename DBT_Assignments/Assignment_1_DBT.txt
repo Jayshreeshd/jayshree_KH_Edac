@@ -1,96 +1,102 @@
-//DBT: Assignment-1
-
-create database Assignment_1;
+create database Assignment_2;
 show databases;
 show tables;
-use Assignment_1;
+use Assignment_2;
 
-1)Create the table Member, Books and Issue without any constraints as mentioned in the schema description above:
+create table PUBLISHERS(
+PUBID      integer(6)   NOT NULL,
+    PNAME      VARCHAR(30),
+    EMAIL      VARCHAR(50)  UNIQUE,
+    PHONE      VARCHAR(30),
+    PRIMARY KEY(PUBID)
+);
+create table subjects
+(
+   subid      varchar(5) primary key,
+   sname      varchar(30)
+);
+drop table  authors;
 
-	create table Member_1 (
-	Member_Id int(5) Primary key, 
-	Member_Name varchar(30),
-	Member_address varchar(50), 
-	Acc_Open_Date date, 
-	Membership_type varchar(20),
-	Penalty_Amount int(7)
-	);
+create table  authors
+(
+   auid     int(5)  primary key,
+   aname    varchar(30),
+   email    varchar(50)  unique,
+   phone    varchar(30)
+);
 
-	create table Books (
-	Book_No int(6),
-	Book_Name varchar(30),
-	Author_name varchar(30),
-	Cost int(7),
-	Category char(10)
-	);
+create table titles
+(
+titles int(5)primary key,
+title varchar(30),
+pubid int(3),
+subid varchar(5),
+pubdate date,
+price int(4));
+/*cover char(1) check(cover in ('P','H','p','h')),
+cover char(1) check(cover in ('P','H','p','h')),
+*/
+/*constraint titles_pubid foreign key(pubid) references publishers(pubid),constraint titles_subid foreign key(subid)references subjects(subid)
+);/
 
-	create table Issue (
-	Lib_Issue_Id int(10),
-	Book_No int(6),
-	Member_Id int(5),
-	Issue_Date date,
-	Return_date date
-	); 
+create table title_authors
+(
+titlesid int (5),
+auid int(5),
+importance int(2),
+primary key(titleid,audid),
+constraint title_authors_titlesid_fk foreign key(titled) references titles(titleid),
+constraint title_authors_auid_fk foreign key(auid) references authors(auid)
+);
+drop table subjects;
+/*create table subjects_backup
+(
+subid varchar(5),
+sname varchar(30)
+);*/
 
-2)View the structure of the tables.
-	desc Member_1;
-	desc Books; 
-	desc Issue;
+ insert into subjects values ('ORA','ORACLE DATABASE 10g');
+ insert into subjects values ('JAVA','JAVA LANGUAGE');
+ insert into subjects values ('JEE','JAVA ENTEPRISE EDITION');
+ insert into subjects values ('VB','VISUAL BASIC.NET');
+ insert into subjects values ('ASP','ASP.NET');
 
-3)Delete/Drop the column Penalty_Amount from Member:
-	alter table Member_1 drop column Penalty_Amount; 
-
-4)Insert following data in table Member:
-	insert into Member_1 values(1,'Richa Sharma',"Pune","2005-12-10","Lifetime",1000);
-	insert into Member_1 values(2,'Garima Sen',"Pune",current_date(),"Annual",4000);
-
-5)Insert at least 5 records with suitable data and save it.
-	insert into Member_1 values(1,'Richa Sharma',"Pune","2005-12-10","Lifetime",1000);
-	insert into Member_1 values(2,'Garima Sen',"Pune",current_date(),"Annual",4000);
-	insert into Member_1 values(3,'Games Gosling',"Mumbai",current_date(),"Lifetime",8000);
-	insert into Member_1 values(4,'John Snow',"Bosari",current_date(),"Annual",9000);
-	insert into Member_1 values(5,'Tony Stark',"Kalyan",current_date(),"Lifetime",10000);
-
-6)Insert data in Book table as follows:
-	insert into Books values (101,"Let us C","Denis Ritchie",450,"System");
-	insert into Books values (102,"Oracle – Complete Ref","Loni",550,"Database");
-	insert into Books values (103,"Mastering SQL","Loni",250,"Database");
-	insert into Books values (104,"PL SQL-Ref","ScottUrman",750,"Database");
-
-
-7)View the data in the tables using simple SQL query.
-	select * from Member_1;
-	select * from Books;
-
-8)Modify the price of book with id 103 to Rs 300 and category to RDBMS:
-	UPDATE Books SET Cost=300 WHERE Book_No= 103; 
- SET SQL_SAFE_UPDATES=0; 
-update Books SET Cost=300 , Category='RDBMS'
- WHERE Book_No =103;
-       
-
-9)Drop table Issue.
-	drop table Issue;
-
-10)Again Create table Issue and insert following data into Issue table. Note leave the column Return_Date blank:
-
-	create table Issue (
-	Lib_Issue_Id int(10),
-	Book_No int(6),
-	Member_Id int(5),
-	Issue_Date date,
-	Return_date date
-	); 
-
-	insert into Issue values(7001,101,1,'10-12-06',null);
-	insert into Issue values(7002,102,2,'25-12-06',null);
-	insert into Issue values(7003,104,1,'15-01-06',null);
-	insert into Issue values(7004,101,1,'04-07-06',null);
-	insert into Issue values(7005,104,2,'15-09-06',null);
-	insert into Issue values(7006,101,3,'18-02-06',null);
+select *from subjects where sname like 'ORACLE DATABASE 10g';
+select *from subjects where sname like 'j%';
+select *from subjects where sname like '____________.net%';
+select *from subjects having subid='java'or'jee';
 
 
-SET SQL_SAFE_UPDATES = 0;  	
-SELECT DATE_FORMAT('2009-10-04 22:23:00', '%W %M %Y');
-https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html
+ insert into authors values (1,'WILLEY','WDT@VSNL.NET','91-11-23260877');
+ insert into authors values (2,'WROX','INFO@WROX.COM',NULL);
+ insert into authors values (3,'TATA MCGRAW-HILL','FEEDBACK@TATAMCGRAWHILL.COM','91-11-33333322');
+ insert into authors values (4,'TECHMEDIA','BOOKS@TECHMEDIA.COM','91-11-33257660');
+select *from authors where aname like '____________HILL%';
+select *from authors where auid>103;
+select *from authors where aname not in('TECHMEDIA','WROX'); 
+
+
+
+insert into titles values(1001,'Asp.Net unleashed',4,'asp','12-04-02',,540);
+insert into titles values(1002,'Oracle10G comp.ref.',3,'ora','1-05-05',575);
+insert into titles values(1003,'Mastering Ejb',1,'JEE','3-02-05',475);
+insert into titles values(1004,'Java comp.ref.',3,'java','3-04-05',499);
+insert into titles values(1005,'Pro.VB.Net',2,'VB','15-06-05',450);
+select * from titles where price<500;
+select * from titles where pubdate <'3-04-05';
+select *from titles where  pubid = 101 or price>103;
+select max(price) from titles; 
+select avg(price) from titles;
+select count(pubid) from titles;
+select sum(price) from titles;
+insert into title_authors values(101,'Herbert Schild','herbert@yahoo.com',null);
+insert into title_authors values(102,'Jame Goodwill''goodwill@hotmail.com',null);
+insert into title_authors values (103, 'Davaid Hunter','hunter@hotmail.com',null);
+insert into title_authors values(104,'Stephen Walther','walther@gmail.com',null);
+insert into title_authors values(105,'Kevin Loney','loney@oracle.com',null);
+insert into title_authors values(106,'Ed.Romans','romans@gmail.com',null);
+
+
+
+
 
