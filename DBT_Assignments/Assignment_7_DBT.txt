@@ -1,0 +1,64 @@
+create database Assignment_7;
+use  Assignment_7;
+show databases; 
+create table Ord_master(Ord_no int, Cust_cd varchar(5), Status varchar(5));
+insert into  Ord_master values(1,'C1','P');
+select *from Ord_master;
+
+create table Ord_dt1(Ord_no int, Prod_cd  varchar(5), Qty int);
+insert into Ord_dt1 values(1,'P1',100);
+insert into Ord_dt1 values(1,'P2', 200);
+select *from Ord_dt1;
+
+create table Prod_master(Prod_cd  varchar(5), Prod_name  varchar(20),  Qty_in_stock  int(10), Booked_qty int );
+insert into Prod_master values('P1','Floopies',1000,1000);
+insert into Prod_master values('P2','Printer',5000,6000);
+insert into Prod_master values('P3','Modems',3000,200);
+select *from Prod_master;
+drop trigger my_trig;
+delimiter $$
+create trigger my_trig before insert on Ord_dt1 for each row
+begin
+update Prod_master set Booked_qty = Booked_qty + new.Qty where Prod_cd = new.Prod_cd;
+end$$
+
+insert into Ord_dt1 values(1,'P1',100);
+
+drop trigger my_trig_1;
+delimiter $$
+create trigger my_trig_1 before insert on Ord_dt1 for each row
+begin
+update Prod_master set Booked_qty = Booked_qty + new.Qty where Prod_cd = new.Prod_cd;
+end$$
+delete from  Ord_dt1 where Prod_cd = 'P2';
+
+delimiter $$
+create table emp(empno int, empname varchar(20), dept_no int, sal int);
+insert into emp values (1, 'Riya', 1, 100000);
+insert into emp values (1, 'Rina', 2, 200000);
+insert into emp values (3, 'Ritu', 3, 300000);
+
+select *from emp;
+select *from dept_sal;
+create table dept_sal (dept_no int, total_salary int);
+insert into dept_sal values(1,50000);
+insert into dept_sal values(2,100000);
+insert into dept_sal values(3,40000);
+drop trigger my_trig_2;
+delimiter $$
+create trigger my_trig_2 before insert on emp for each row
+begin
+update dept_sal set total_salary = total_salary + new.sal where dept_no = new.dept_no;
+end $$
+insert into emp values (4, 'Siya', 4, 800000);
+insert into emp values (5, 'Sila', 2, 500000);
+insert into emp values (6, 'Sima', 1, 200000);
+
+delimiter $$
+create trigger my_trig_3 before delete on emp for each row
+begin
+update dept_sal set total_salary = total_salary - old.sal where dept_no = old.dept_no;
+end$$
+delete from emp where dept_no = 3;
+delete from emp where dept_no = 1;
+

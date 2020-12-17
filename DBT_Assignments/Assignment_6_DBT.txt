@@ -1,0 +1,106 @@
+create database assgn6;
+use assgn6;
+delimiter $$
+
+create function my_fun(a int(10))returns int(10)
+begin
+declare fact int(10) default 1;
+test_loop:repeat
+set fact = fact*a;
+set a = a-1;
+until a=1
+end repeat;
+return fact;
+end $$
+select my_fun(5);
+
+
+
+delimiter $$
+create function Que_2(n int(5)) returns varchar(25)
+begin
+declare flag int(2) default 1;
+declare i int(2) default 2;
+while i<n 
+do
+	if n % i = 0 then
+		set flag = 0;
+	end if;
+	set i=i+1;
+    end while;
+if flag = 1 then
+	return "Prime number";
+	else 
+	return "Not Prime Number";
+end if;
+end $$
+select Que_2(8);
+
+
+delimiter $$
+create function Que_3 (inches int (10))returns varchar(200)
+begin
+declare yard numeric(10);
+declare foot numeric(10);
+set yard= inches / 36;
+set inches = inches % 36;
+set foot= inches / 12;
+set inches = inches % 12;
+return concat(yard ,' yard ', foot ,' foot ',inches ,'inches');
+end $$
+select Que_3(124);
+
+
+delimiter $$
+CREATE FUNCTION SAL(DEPTID INT3) RETURNS VARCHAR(50)
+BEGIN
+UPDATE emp SET sal=(sal+(sal*0.1)) WHERE deptno=deptid;
+RETURN 'updated';
+END$$
+SELECT * FROM emp;
+
+SELECT sal(10);
+
+delimiter $$
+CREATE FUNCTION USER_ANNUAL_COMP (P_ENO INT4,P_COMP INT4) RETURNS INT8
+BEGIN
+DECLARE ANNUAL_COM, SALR INT8;
+SET SALR=(SELECT (SAL) FROM EMP WHERE EMPNO=P_ENO);
+SET ANNUAL_COM = (SALR + P_COMP)*12;
+RETURN ANNUAL_COM;
+END$$
+SELECT SAL FROM EMP WHERE EMPNO=1004;
+SELECT USER_ANNUAL_COMP(1004,200);
+
+Create table EMP ( EMPNO integer(4) not null, ENAME varchar(30) not null, JOB varchar(10),MGR integer (4), HIREDATE date, SAL numeric(7,2), DEPTNO integer(2) ); 
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1000,  'Manish' , 'SALESMAN', 1003,  '2020-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1001,  'Manoj' , 'SALESMAN', 1003,  '2018-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1002 , 'Ashish', 'SALESMAN',1003 , '2013-02-18',  750,  30 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1004,  'Rekha', 'ANALYST', 1006 , '2001-02-18', 3000,  10);
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL,DEPTNO ) values(1005 , 'Sachin', 'ANALYST', 1006 ,  '2019-02-18', 3000, 10 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1006,  'Pooja',  'MANAGER'  ,     null    , '2000-02-18' ,6000, 10 );
+desc EMP;
+
+Create table dept (dno numeric(4) not null, dname varchar(10) not null,area varchar(30));
+Insert into dept(dno,dname,area) values(10,'Store','Mumbai');
+Insert into dept(dno,dname,area) values(20,'Purchase','Mumbai');
+Insert into dept(dno,dname,area) values(30,'Store', 'Delhi');
+Insert into dept(dno,dname,area) values(40,'Marketing','Pune');
+Insert into dept(dno,dname,area) values(50,'Finance','Delhi');
+Insert into dept(dno,dname,area) values(60,'Accounts','Mumbai');
+
+select from*EMP
+delimiter $$
+create procedure query(in p_myeno int,out p_myjob varchar(20), out p_mysal int) 
+begin
+declare var int;
+set var = (select EMPNO from EMP where EMPNO = p_myeno);
+if p_myeno = EMPNO then
+select sal,job into p_mysal, p_myjob from EMP where EMPNO = p_myeno;
+else 
+select "empid does not exist";
+end if;
+end $$
+call query(1000,x,y);
+select *from x;
+select *from y;

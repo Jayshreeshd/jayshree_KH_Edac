@@ -1,0 +1,155 @@
+create database Assignment_8;
+use Assignment_8;
+select *from EMP;
+
+
+Create table EMP ( EMPNO integer(4) not null, ENAME varchar(30) not null, JOB varchar(10),MGR integer (4), HIREDATE date, SAL numeric(7,2), DEPTNO integer(2) ); 
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1000,  'Manish' , 'SALESMAN', 1003,  '2020-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1001,  'Manoj' , 'SALESMAN', 1003,  '2018-02-18', 600,  30) ;
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1002 , 'Ashish', 'SALESMAN',1003 , '2013-02-18',  750,  30 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1004,  'Rekha', 'ANALYST', 1006 , '2001-02-18', 3000,  10);
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL,DEPTNO ) values(1005 , 'Sachin', 'ANALYST', 1006 ,  '2019-02-18', 3000, 10 );
+Insert into EMP (EMPNO ,ENAME, JOB, MGR, HIREDATE, SAL, DEPTNO ) values(1006,  'Pooja',  'MANAGER'  ,     null    , '2000-02-18' ,6000, 10 );
+desc EMP;
+
+Create table dept (dno numeric(4) not null, dname varchar(10) not null,area varchar(30));
+Insert into dept(dno,dname,area) values(10,'Store','Mumbai');
+Insert into dept(dno,dname,area) values(20,'Purchase','Mumbai');
+Insert into dept(dno,dname,area) values(30,'Store', 'Delhi');
+Insert into dept(dno,dname,area) values(40,'Marketing','Pune');
+Insert into dept(dno,dname,area) values(50,'Finance','Delhi');
+Insert into dept(dno,dname,area) values(60,'Accounts','Mumbai');
+
+delimiter $$
+create procedure my_cur_1(in job_name varchar(20))
+begin
+declare emp_name varchar(20);
+declare e_sal int(10);
+declare finished int(2)default 0;
+declare curs_1 cursor for select  ENAME,SAL from EMP where JOB =  job_name ;
+declare continue handler for not found set finished = 1;
+open curs_1;
+test_loop:Loop
+fetch curs_1 into  emp_name,e_sal;
+if finished = 1 then
+leave test_loop;
+else
+select emp_name, e_sal ;
+end if;
+iterate test_loop;
+end loop test_loop;
+close curs_1;
+end$$
+drop procedure my_cur_1;
+call my_cur_1('ANALYST');
+select * from EMP;
+
+
+delimiter $$
+create procedure my_cur_2()
+begin
+declare e_id int;
+declare emp_name varchar(20);
+declare e_sal numeric;
+declare finished int(2)default 0;
+declare curs_2 cursor for select  EMPNO,ENAME,SAL from EMP order by SAL limit 5 ;
+declare continue handler for not found set finished = 1;
+open curs_2;
+test_loop:Loop
+fetch curs_2 into e_id,emp_name,e_sal;
+if finished = 1 then
+leave test_loop;
+else
+select e_id,emp_name, e_sal ;
+end if;
+iterate test_loop;
+end loop test_loop;
+close curs_2;
+end$$
+drop procedure my_cur_2;
+call my_cur_2();
+select * from EMP;
+
+create table emp3(emp_id int primary key,fname varchar(20),lname varchar(20),salary int);
+insert into emp3 values(101,"Jayshree","Shinde",25000);
+insert into emp3 values(102,"Ekta","Joshi",10000);
+insert into emp3 values(103,"Ashwini","Patil",19000);
+insert into emp3 values(104,"Pooja","Patil",25000);
+insert into emp3 values(105,"Monali","Sinkar",20000);
+
+delimiter $$
+create procedure Concat_Name()
+begin
+declare f_name varchar(20);
+declare l_name varchar(20);
+declare done int default 0;
+declare Concat_Names cursor for select fname,lname from emp3;
+declare exit handler for not found set done=1;
+open Concat_Names ;
+l1:loop
+fetch Concat_Names into f_name,l_name;
+if done=1 then
+leave l1;
+else
+select concat(f_name," ",l_name);
+end if;
+end loop;
+close Concat_Names;
+end $$
+
+call Concat_Name();
+drop procedure concat_name;
+
+select * from emp3;
+
+delimiter $$
+create procedure my_cursor_4()
+begin 
+declare e_id int;
+declare f_name varchar(20);
+declare l_name varchar(20);
+declare sal int;
+declare finished int default 0;
+declare  show_cursor_data cursor for select * from emp3;
+declare exit handler for not found set finished =1;
+open show_cursor_data;
+test_loop:repeat
+fetch show_cursor_data into e_id,f_name,l_name,sal;
+if f_name='Pooja' then
+select * from emp3 where fname='Pooja';
+end if;
+until finished
+end repeat;
+close show_cursor_data;
+end $$
+
+call my_cursor_4();
+
+create table emp2(emp_id int primary key, ename varchar(20), salary int);
+insert into emp2 values(101,'Pooja',20000);
+insert into emp2 values(102,'Aisha',50000);
+insert into emp2 values(103,'Gayatri',70000);
+insert into emp2 values(104,'Snehal',30000);
+insert into emp2 values(105,'Rohit',100000);
+
+delimiter $$
+create procedure my_cursor_5()
+begin
+declare id int;
+declare e_name varchar(20);
+declare sal int;
+declare finished int default 0;
+declare del_cursor cursor for select * from emp2 where salary<100000;
+declare continue handler  for not  found set finished=1;
+open del_cursor;
+repeat
+fetch del_cursor into id,e_name,sal;
+delete from emp2 where emp_id=id;
+until finished
+end repeat;
+close del_cursor;
+end $$
+drop procedure my_cursor_5;
+
+call my_cursor_5();
+select * from emp2;

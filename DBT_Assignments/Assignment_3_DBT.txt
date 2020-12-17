@@ -1,0 +1,43 @@
+create database Assignment_3;
+use  Assignment_3;
+show databases; 
+
+create table Department(dept_id int(10) primary key,dept_name varchar(50));
+insert into Department values(1,"Finance");
+insert into Department values(2,"Traning");
+insert into Department values(3,"Marketing");
+select  *from  Department;
+
+create table Employee(empid int(10) primary key,emp_name varchar(50),dept_id int (10),salary int(255) ,manager int(10)
+,constraint fk_dept_id foreign key (dept_id)references Department(dept_id));
+ALTER TABLE Department MODIFY dept_id integer(6) NOT NULL;
+ALTER TABLE Employee MODIFY COLUMN manager int;
+desc Employee;
+insert into  Employee values(1,"Arun",1,8000,4);
+insert into  Employee values(2,"Kiran",1,7000,1);
+insert into  Employee values(3,"Scott",1,3000,1);
+insert into  Employee values(4,"Max",2,9000,null);
+insert into  Employee values(5,"Jack",2,8000,4);
+insert into  Employee values(6,"king",null,6000,1);
+select  *from Employee;
+
+show tables;
+
+select dept_id, sum(salary) 
+from  Employee
+group by dept_id;
+
+select * from employee;
+select * from Department;
+
+select sum(dept_id),salary
+from Employee
+group by dept_id
+having sum(salary) > 18000 ;
+
+select * from Employee
+group by dept_id
+having sum(salary) < 20000 ;
+
+
+

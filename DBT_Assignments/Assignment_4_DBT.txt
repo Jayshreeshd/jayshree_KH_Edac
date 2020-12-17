@@ -1,0 +1,48 @@
+create database assignment_4;
+use assignment_4;
+show tables;
+create table department(dept_id int(1) primary key,
+dept_name varchar(15));
+
+create table Employee( empid int(2) Auto_increment primary key,
+ emp_name varchar(10),dept_id int(1), salary int(4),
+manager int(1),foreign key(dept_id) references Department(dept_id));
+
+insert into Employee (emp_name, dept_id,salary, manager) values
+('Arun',1,8000,4);
+insert into Employee (emp_name, dept_id,salary, manager) values
+('Scott',1,3000,1);
+insert into Employee (emp_name, dept_id,salary, manager) values
+('Kiran',1,7000,1);
+insert into Employee (emp_name, dept_id,salary, manager) values
+('Max',2,9000,null);
+insert into Employee (emp_name, dept_id,salary, manager) values
+('Jack',2,8000,4);
+insert into Employee (emp_name, dept_id,salary, manager) values
+('King',null,6000,1);
+
+insert into Department values(1,'Finance'),(2,'Training'),(3,'Marketing');
+select dept_name,emp_name from Employee  inner join
+department on Employee.dept_id = Department.dept_id;
+select *from Department inner join
+Employee on Employee.dept_id = Department.dept_id;
+select dept_id,sum(salary) from Employee group by dept_id;
+select *from Employee right outer join Department on Employee.dept_id
+
+create table emp1(emp_no int ,     emp_name varchar(20));
+insert into emp1 values( 1 , 'A' );
+insert into emp1 values( 2 , 'B' );
+insert into emp1 values( 3 , 'C');
+
+create table emp2( emp_no int , emp_name varchar(20) );
+insert into emp1 values( 1 , 'A'  );
+insert into emp1 values( 2 , 'B' );
+insert into emp1 values( 4 , 'D' );
+insert into emp1 values( 5 , 'E' );
+
+SELECT * FROM emp1 UNION select * from emp2 
+
+select empid,emp_name from employee where salary=(select salary from employee where emp_name='Arun');
+select empid,emp_name from employee where dept_id=(select dept_id from employee where emp_name='Jack');
+select emp_name,salary from employee where salary=(select min(salary) from employee);
+update employee set salary=15000 where dept_id=(select dept_id  where emp_name='Max');
