@@ -1,0 +1,113 @@
+function myfun(){
+}
+function myfun(){
+console.log("Myfun");
+}
+undefined
+myfun();
+VM144:2Myfunc
+undefined
+function myfunc(a,b){
+return(a*b);
+}
+undefined
+myfunc(5,2);
+10
+2]var person = {firstname:"ABC",lastname:"PQR"}
+undefined
+console.log(person.firstname);
+Abc
+
+console.log(person.lastname);
+PQR
+
+3]var student=["123","12","pqr"]
+console.log(student);
+(3)["123","12","pqr"]0:"123"1:"12"2:
+undefined
+
+4]function is_integer(x)
+{
+  if(isNaN(x))
+    {
+      console.log("Is not a Number");
+    }
+  
+  else
+    {
+   console.log("Is  a Number");
+    }
+}
+
+is_integer(5);
+
+
+VM267:10 Is  a Number
+5]var arr=[1,2,3,4,5];
+undefined
+function add_add(arr)
+{
+  var sum=0;
+  for(var i in arr)
+    {
+      sum+=arr[i];
+    }
+  return sum;
+}
+
+arr=[1,2,3,4,5];
+add_add(arr);
+15
+
+6]function toCelcius(f)
+{
+ return (5/9) * (f-32);
+}
+
+toCelcius(100)
+37.77777777777778
+
+function toFahrenheit(c)
+{
+ return ((c*1.8)+32);
+}
+
+toFahrenheit(100)
+212
+
+7]function factorial(n){
+var fact=1;
+for(var i=n;i>1;i--)
+{
+fact = fact*i;
+}
+return fact;
+}
+factorial(5);
+120
+
+8]function amt(amount,coin)
+{
+  if(amount===0)
+    {
+      return [];
+    }
+  else
+    {
+      if(amount>=coin[0])
+        {
+          x=(amount-coin[0]);
+          return [coin[0]].concat(amt(x,coin));
+        }
+      else
+        {
+          coin.shift();
+          return amt(amount,coin);
+        }
+    }
+}
+
+coin=[25,10,5,2,1];
+amt(87,coin);
+
+(5) [25, 25, 25, 10, 2]

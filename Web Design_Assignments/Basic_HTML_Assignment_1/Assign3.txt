@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<title>Vist Sites</title>
+<body>
+
+<h1>Here are my favorite sites</h1>
+
+<h2>Click on a name to go that page<h2>
+
+<ul>
+<li> <a  href="https://www.w3schools.com/" target="_blank">W3Schools</a></li>
+<li> <a  href="https://www.youtube.com/" target="_blank">Youtube</a></li>
+<li> <a  href="https://www.google.com/" target="_blank">Google</a></li>
+<li> <a  href="https://in.linkedin.com/" target="_blank">LinkedIn</a></li> 
+ </ul>
+ </body>
+ </html>

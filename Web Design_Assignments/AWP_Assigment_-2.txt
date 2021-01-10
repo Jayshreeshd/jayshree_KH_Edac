@@ -1,0 +1,110 @@
+Q 2. Using JavaScript
+
+a)Display a message “Hello Edac”
+ console.log(“Hello Edac”);
+
+b)Declare variables with different Datatypes and initialize and display them
+
+var fruits = ["Banana", "Orange", "Apple", "Mango"]; 
+console.log(fruits);
+var length = 20; //number data type
+var name = "CDAC"; // String data type
+var x = true;
+ console.log(x);
+var y = 3.14;
+ console.log(y);
+var a = 20;
+var b = 20;
+if (a == b)
+  console.log(x);
+var txt = "JavaScript"; 
+ console.log(txt);
+typeof 2;
+typeof 'XYZ';
+var q ; //undefined
+ console.log(q);
+var z = "Hello" + 5;
+ console.log(z);
+
+c)Demonstrate use of different String methods
+var txt = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+var sln = txt.length;
+ console.log(sln);
+
+var str = "Please locate where 'locate' occurs!";
+var pos = str.indexOf("locate");
+console.log(pos);
+
+var str = "Please locate where 'locate' occurs!";
+var pos = str.lastIndexOf("locate");
+console.log(pos);
+
+var pos = str.indexOf("locate", 15);
+console.log(pos);
+
+var str = "Please locate where 'locate' occurs!";
+var pos = str.search("locate");
+console.log(pos);
+
+var str = "Apple, Banana, Kiwi";
+var res = str.slice(7, 13);
+console.log( res);
+
+var str = "Apple, Banana, Kiwi";
+var res = str.substr(7);
+console.log( res);
+
+var str = "Apple, Banana, Kiwi";
+var res = str.substr(-4);
+console.log( res);
+
+
+str = "Please visit CDAC!";
+var n = str.replace("CDAC", "E-DAC");
+console.log(n);
+
+str = "Please visit cdac!";
+var n = str.replace(/CDAC/i, "E-DAC");
+console.log(n);//To replace case insensitive, use a regular expression with an /i flag (insensitive)
+
+
+str = "Please visit CDAC and CDAC!";
+var n = str.replace(/CDAC/g, "E_DAC");
+console.log(n);//To replace all matches, use a regular expression with a /g flag (global match)
+
+
+var text1 = "Hello World!";       // String
+var text2 = text1.toUpperCase();  // text2 is text1 converted to upper
+console.log(text2);
+
+
+var text1 = "Hello";
+var text2 = "World";
+var text3 = text1.concat(" ", text2);
+console.log(text3);
+
+
+var str = "       Hello World!        ";
+alert(str.trim());
+console.log(str);
+
+
+var txt = "a,b,c,d,e";   // String
+txt.split(",");          // Split on commas
+txt.split(" ");          // Split on spaces
+txt.split("|"); 
+console.log(txt);
+
+let str = "5";
+str = str.padStart(4,0);
+console.log(str);
+
+let str = "5";
+str = str.padStart(4,0);
+console.log(str);//0005
+
+let str = "5";
+str = str.padEnd(4,0);
+console.log(str);//5000
+
+

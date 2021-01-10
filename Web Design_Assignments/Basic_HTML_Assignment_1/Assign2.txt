@@ -1,0 +1,41 @@
+<!Doctype html>
+<html>
+<body>
+<hr>
+<h2>The Best Features of the Internet</h2>
+<hr>
+<ul style="list-style:disc;">
+<li>You can meet new people from countries around the world.</i>
+</i>You have access to new media as it becomes public:</i>
+
+   <ul>
+      <li>New games</li>
+      <li>new applications</li>
+   </ul>
+   <ul> 
+      <ol>
+        <li>For Bussiness</li>
+        <li>For Pleasure</li> 
+      </ol>
+    </ul>
+    <ul>
+        <li>Around the clock news</li>
+        <li>Search Engines</li>
+        <li>Shopping</li>
+        <li>Programming</li>
+    </ul>
+    <ul>
+      <ol>
+        <li>XML</li>
+        <li>JAVA</li>
+        <li>HMTL5</li>
+        <li>JavaScript</li>
+        <li>New Languages</li>
+      </ol>
+    </ul>
+         <li>Links</li>
+         <li>Keeping in touch with old friends</li>
+         <li>It's the technology pf the future!</li>
+    </ul>
+</body>
+</html>

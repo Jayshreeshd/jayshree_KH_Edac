@@ -1,0 +1,97 @@
+1]var add = (function (){
+var counter = 0;
+return function () {counter += 1;
+return counter;}
+})();
+add();
+1
+add();
+2
+add();
+3
+
+2]function reverse(){
+
+var str = "Jayshree"
+var rev_str="";
+for(var i = str.length-1;i>=0;i--)
+{
+rev_str = rev_str+str[i];
+}
+return rev_str;
+}
+reverse();
+"eerhsyaJ"
+
+3]var circleArr = [
+    {radius: 5},
+    {radius: 9},
+    {radius: 2}
+        ];
+
+circleArr.sort(function (a, b)
+{
+return a.radius - b.radius;
+});
+
+4]//Array Sorting//
+
+var intArray = [4,7,2,8,5,9,6,1,0,3];
+function sortIntArray(arr1)
+{
+var temp=0;
+var i;
+var j;
+for(i=0 ; i<(arr1.length)-1 ; i++)
+{
+    for(j=i+1 ; j<arr1.length ; j++)
+      {
+        if(arr1[i] > arr1[j])
+          {
+             temp = arr1[i];
+             arr1[i] = arr1[j];
+             arr1[j] = temp;
+  }
+ }
+}
+   return arr1;
+   }
+document.write("Sorting of Integer Array [4,7,2,8,5,9,6,1,0,3] = ["+sortIntArray(intArray)+"]");
+
+//String Sorting//
+
+var strArray = ["P","S","D","F","W","Q"];
+        function sortStrArray(arr2)
+        {
+            var temp=0;
+            var i;
+            var j;
+            for(i=0 ; i<(arr2.length)-1 ; i++)
+            {
+                for(j=i+1 ; j<arr2.length ; j++)
+                {
+                    if(arr2[i] > arr2[j])
+                    {
+                        temp = arr2[i];
+                        arr2[i] = arr2[j];
+                        arr2[j] = temp;
+                    }
+                }
+            }
+            return arr2;
+        }
+
+5]function length_of_array(arr)
+ {
+ var count = arr.filter(function (x)
+ {
+  if(x != "" || x != null)
+  return true;
+  else
+  return false;
+ });
+  return count.length;
+}
+
+var array1 = [2,,8,5,9,,6,,undefined,1,0,null,3];
+document.write("Length of Array [2,,8,5,9,,6,,undefined,1,0,null,3] = "+length_of_array(array1));
